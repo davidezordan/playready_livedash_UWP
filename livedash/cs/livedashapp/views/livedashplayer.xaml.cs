@@ -216,10 +216,11 @@ namespace LiveDashApp
         {
             IList<DASHEntry> dashEntryList = new List<DASHEntry>();
             dashEntryList.Add(new DASHEntry("DASH-IF Live Stream 1 - Counter", "http://54.201.151.65/livesim/testpic_2s/Manifest.mpd"));
-            dashEntryList.Add(new DASHEntry("DASH-IF Live Stream 2 - Counter", "http://eu1.eastmark.net/pdash/testpic_6s/Manifest.mpd"));
+
+            // Sample streams from DASHIF Reference Client 1.4.0 - http://www.dashif.org/reference/players/javascript/index.html
             dashEntryList.Add(new DASHEntry("DASH Unified streaming", "http://live.unified-streaming.com/loop/loop.isml/loop.mpd?format=mp4&session_id=25020"));
             dashEntryList.Add(new DASHEntry("DASH Cenc PlayReady MPD", "http://html5.cablelabs.com:8100/cenc/pr/dash_initdata.mpd"));
-            dashEntryList.Add(new DASHEntry("DASH Cenc PlayReady", "http://html5.cablelabs.com:8100/cenc/pr/dash.mpd")); 
+            dashEntryList.Add(new DASHEntry("DASH Cenc PlayReady", "http://html5.cablelabs.com:8100/cenc/pr/dash.mpd"));
 
             //Add urls to list here
             comboBox1.DataContext = dashEntryList;
