@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Xml;
 using Windows.Data.Xml.Dom;
 using System.Text.RegularExpressions;
 
@@ -105,9 +104,9 @@ namespace LiveDash.Util
                             ExpandDASHUrlSegmentTemplate(initializationFormat, manifest.BaseUrl,
                                 bitrate, repID, 0, 0, out initializationUrl);
                             stream.InitSegmentUrl = initializationUrl;
-                            
+
                             var segmentTimelineQuery = segmentTemplate.ChildNodes.Where(node => node.NodeName.Equals("SegmentTimeline"));
-                            
+
                             MediaSegmentInformation segmentInfo = new MediaSegmentInformation();
                             segmentInfo.Timescale = timescale;
                             segmentInfo.RepresentationID = repID;
@@ -164,7 +163,7 @@ namespace LiveDash.Util
                             stream.SegmentInfoType = MediaStream.SegmentInformationType.Base;
                         }
 
-                        
+
                         dashPeriod.AddStream(stream);
                     } // each adaptation set
 
@@ -224,34 +223,34 @@ namespace LiveDash.Util
             if (!root.GetAttribute("availabilityStartTime").Equals(""))
             {
                 string availabilityStartTime = root.GetAttribute("availabilityStartTime");
-                manifest.AvailibilityStartTime = XmlConvert.ToDateTimeOffset(availabilityStartTime);
+                manifest.AvailibilityStartTime = System.Xml.XmlConvert.ToDateTimeOffset(availabilityStartTime);
             }
             if (!root.GetAttribute("minBufferTime").Equals(""))
             {
                 string minBufferTime = root.GetAttribute("minBufferTime");
-                manifest.MinBufferTime = XmlConvert.ToTimeSpan(minBufferTime);
+                manifest.MinBufferTime = System.Xml.XmlConvert.ToTimeSpan(minBufferTime);
             }
             if (!root.GetAttribute("minimumUpdatePeriod").Equals(""))
             {
                 manifest.HasMinimumUpdatePeriod = true;
                 string minUpdatePeriod = root.GetAttribute("minimumUpdatePeriod");
-                manifest.MinimumUpdatePeriod = XmlConvert.ToTimeSpan(minUpdatePeriod);
+                manifest.MinimumUpdatePeriod = System.Xml.XmlConvert.ToTimeSpan(minUpdatePeriod);
             }
             if (!root.GetAttribute("mediaPresentationDuration").Equals(""))
             {
                 manifest.HasPresentationDuration = true;
                 string mediaPresentationDuration = root.GetAttribute("mediaPresentationDuration");
-                manifest.MediaPresentationDuration = XmlConvert.ToTimeSpan(mediaPresentationDuration);
+                manifest.MediaPresentationDuration = System.Xml.XmlConvert.ToTimeSpan(mediaPresentationDuration);
             }
             if (!root.GetAttribute("timeShiftBufferDepth").Equals(""))
             {
                 string timeShiftBufferDepth = root.GetAttribute("timeShiftBufferDepth");
-                manifest.TimeShiftBufferDepth = XmlConvert.ToTimeSpan(timeShiftBufferDepth);
+                manifest.TimeShiftBufferDepth = System.Xml.XmlConvert.ToTimeSpan(timeShiftBufferDepth);
             }
             if (!root.GetAttribute("publishTime").Equals(""))
             {
                 string publishTime = root.GetAttribute("publishTime");
-                manifest.PublishTime = XmlConvert.ToDateTimeOffset(publishTime);
+                manifest.PublishTime = System.Xml.XmlConvert.ToDateTimeOffset(publishTime);
             }
             else
             {
@@ -266,7 +265,7 @@ namespace LiveDash.Util
             IXmlNode lastPeriod = periods.Last<IXmlNode>();
             if (lastPeriod.Attributes.GetNamedItem("duration") != null)
             {
-                manifest.LastPeriodDuration = XmlConvert.ToTimeSpan(lastPeriod.Attributes.GetNamedItem("duration").InnerText);
+                manifest.LastPeriodDuration = System.Xml.XmlConvert.ToTimeSpan(lastPeriod.Attributes.GetNamedItem("duration").InnerText);
             }
         }
 
@@ -279,12 +278,12 @@ namespace LiveDash.Util
             if (periodElement.Attributes.GetNamedItem("duration") != null)
             {
                 string periodDuration = periodElement.Attributes.GetNamedItem("duration").InnerText;
-                period.Duration = XmlConvert.ToTimeSpan(periodDuration);
+                period.Duration = System.Xml.XmlConvert.ToTimeSpan(periodDuration);
             }
             if (periodElement.Attributes.GetNamedItem("start") != null)
             {
                 string periodStart = periodElement.Attributes.GetNamedItem("start").InnerText;
-                period.Start = XmlConvert.ToTimeSpan(periodStart);
+                period.Start = System.Xml.XmlConvert.ToTimeSpan(periodStart);
                 this.periodStart = period.Start;
                 hasPeriodStartAttribute = true;
             }
@@ -302,7 +301,7 @@ namespace LiveDash.Util
             if (representaion.Attributes.GetNamedItem("bandwidth") != null)
             {
                 string bandwidthText = representaion.Attributes.GetNamedItem("bandwidth").InnerText;
-                bitrate = XmlConvert.ToUInt32(bandwidthText);
+                bitrate = System.Xml.XmlConvert.ToUInt32(bandwidthText);
             }
         }
 
@@ -314,7 +313,7 @@ namespace LiveDash.Util
             if (segmentTemplate.Attributes.GetNamedItem("duration") != null)
             {
                 string durationText = segmentTemplate.Attributes.GetNamedItem("duration").InnerText;
-                duration = XmlConvert.ToUInt64(durationText);
+                duration = System.Xml.XmlConvert.ToUInt64(durationText);
             }
             if (segmentTemplate.Attributes.GetNamedItem("initialization") != null)
             {
@@ -327,17 +326,17 @@ namespace LiveDash.Util
             if (segmentTemplate.Attributes.GetNamedItem("startNumber") != null)
             {
                 string startNumberText = segmentTemplate.Attributes.GetNamedItem("startNumber").InnerText;
-                startNumber = XmlConvert.ToUInt32(startNumberText);
+                startNumber = System.Xml.XmlConvert.ToUInt32(startNumberText);
             }
             if (segmentTemplate.Attributes.GetNamedItem("timescale") != null)
             {
                 string timescaleText = segmentTemplate.Attributes.GetNamedItem("timescale").InnerText;
-                timescale = XmlConvert.ToUInt64(timescaleText);
+                timescale = System.Xml.XmlConvert.ToUInt64(timescaleText);
             }
             if (segmentTemplate.Attributes.GetNamedItem("presentationTimeOffset") != null)
             {
                 string presentationTimeOffsetText = segmentTemplate.Attributes.GetNamedItem("presentationTimeOffset").InnerText;
-                presentationTimeOffset = XmlConvert.ToUInt64(presentationTimeOffsetText);
+                presentationTimeOffset = System.Xml.XmlConvert.ToUInt64(presentationTimeOffsetText);
             }
         }
 
@@ -348,9 +347,9 @@ namespace LiveDash.Util
             if (format.StartsWith(HttpPrefix) || format.StartsWith(HttpsPrefix))
             {
                 result += format;
-                
+
             }
-            else 
+            else
             {
                 result += baseUrl;
 
@@ -365,7 +364,7 @@ namespace LiveDash.Util
                 result += format;
 
             }
-            
+
             result = result.Replace("$Bandwidth$", bitrate.ToString());
             result = result.Replace("$Number$", number.ToString());
             result = result.Replace("$Time$", time.ToString());
@@ -431,7 +430,7 @@ namespace LiveDash.Util
                 stream.PushBackSegment(segment);
                 segmentNumber++;
                 time += segmentDuration;
-                
+
             }
 
             if (remain > 0)
@@ -586,7 +585,7 @@ namespace LiveDash.Util
                 }
                 return;
             }
-            
+
         }
 
     }
